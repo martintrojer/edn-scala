@@ -16,11 +16,12 @@ import EDN._
 
 scala> Reader.readAll("{:a 1}")
 res0: Any = Map(:a -> 1.0)
+
 scala> Writer.writeAll(Map(Vector(1) -> Set(2)))
 res1: String = {[] #{2}}
 ```
 
-Also see the [tests](https://github.com/martintrojer/edn-scala/blob/master/src/test/scala/EDN/ReaderTest.scala).
+Also see the [tests](https://github.com/martintrojer/edn-scala/blob/master/src/test/scala/EDN).
 
 ## TODO
 
