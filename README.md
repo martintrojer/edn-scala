@@ -6,7 +6,11 @@ An [EDN format](https://github.com/edn-format/edn) reader/writer for Scala.
 
 Add the following line in your build.sbt;
 
-```libraryDependencies += "io.github.martintrojer" % "edn-scala" % "0.1"```
+```
+resolvers += "Sonatype snapshots" at "http://oss.sonatype.org/content/repositories/snapshots/"
+
+libraryDependencies += "io.github.martintrojer" % "edn-scala_2.10" % "0.1-SNAPSHOT"
+```
 
 Using the console;
 
