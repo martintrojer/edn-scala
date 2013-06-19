@@ -1,12 +1,14 @@
 # edn-scala
 
-An [EDN format](https://github.com/edn-format/edn) reader for Scala
+An [EDN format](https://github.com/edn-format/edn) reader for Scala.
 
 ## Usage
 
-Add the following line in your build.sbt
+Add the following line in your build.sbt;
 
 ```libraryDependencies += "io.github.martintrojer" % "edn-scala" % "0.1"```
+
+Using the console;
 
 ```scala
 scala> import EDN.Reader
@@ -17,6 +19,11 @@ res0: Any = Map(:a -> 1.0)
 ```
 
 Also see the [test](https://github.com/martintrojer/edn-scala/blob/master/src/test/scala/EDN/ReaderTest.scala).
+
+## TODO
+
+* make #inst EDN (RFC-3339) conformant
+* leading / trailing commas
 
 ## License
 
