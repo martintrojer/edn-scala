@@ -8,13 +8,13 @@ object Reader extends JavaTokenParsers {
   val map: Parser[Map[Any, Any]] = "{" ~> rep(pair) <~ "}" ^^ (Map() ++ _)
   val vector: Parser[Vector[Any]] = "[" ~> rep(elem) <~ "]" ^^ (Vector() ++ _)
   val list: Parser[List[Any]] = "(" ~> rep(elem) <~ ")"
-  val keyword: Parser[String] = """:[^,#\{\}\[\]\s]+""".r
+  val keyword: Parser[String] = """:[^,#\"\{\}\[\]\s]+""".r
   lazy val pair: Parser[(Any, Any)] = elem ~ elem ^^ {
     case key ~ value => (key, value)
   }
-  lazy val tagElem: Parser[Any] = """#[^,#\{\}\[\]\s]+""".r ~ elem ^^ {
-    case "#uuid" ~ (value: String) => UUID.fromString(value.tail.init)
-    case "#inst" ~ (value: String) => Instant.read(value.tail.init)
+  lazy val tagElem: Parser[Any] = """#[^,#\"\{\}\[\]\s]+""".r ~ elem ^^ {
+    case "#uuid" ~ (value: String) => UUID.fromString(value)
+    case "#inst" ~ (value: String) => Instant.read(value)
     case name ~ value => (name, value)
   }
   val ratio: Parser[Double] = floatingPointNumber ~ "/" ~ floatingPointNumber ^^ {
@@ -26,7 +26,7 @@ object Reader extends JavaTokenParsers {
                               "nil"               ^^ (_ => null)  |
                               "true"              ^^ (_ => true)  |
                               "false"             ^^ (_ => false) |
-                              stringLiteral
+                              stringLiteral       ^^ { case "" => ""; case s => s.tail.init }
 
   val elem: Parser[Any] = ednElem | "," ~> elem | "N" ~> elem
 

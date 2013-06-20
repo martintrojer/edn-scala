@@ -37,6 +37,7 @@ class WriterTest extends FunSuite {
   test("strings / keyword") {
     expectResult("\"a\"") { Writer.writeAll("a") }
     expectResult(":a") { Writer.writeAll(":a") }
+    expectResult("[::foo/bar \"baz\"]") { Writer.writeAll(Vector("::foo/bar", "baz")) }
   }
 
   test("map") {

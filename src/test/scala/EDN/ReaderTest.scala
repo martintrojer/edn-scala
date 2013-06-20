@@ -31,6 +31,7 @@ class ReaderTest extends FunSuite {
   test("keyword") {
     expectResult(":a") { Reader.readAll(":a") }
     expectResult("::a") { Reader.readAll("::a") }
+    expectResult(":foo/bar") { Reader.readAll(":foo/bar") }
   }
 
   test("map") {
@@ -51,7 +52,7 @@ class ReaderTest extends FunSuite {
 
   test("#uuid") {
     val uuidStr = "f81d4fae-7dec-11d0-a765-00a0c91e6bf6"
-    expectResult(UUID.fromString(uuidStr)) { Reader.readAll("#uuid \"" + uuidStr + "\"") }
+    expectResult(UUID.fromString(uuidStr)) { Reader.readAll("#uuid\"" + uuidStr + "\"") }
   }
 
   // this is not EDN complaint ATM
@@ -67,8 +68,10 @@ class ReaderTest extends FunSuite {
     expectResult(Map(":a" -> 1, ":b" -> 2)) { Reader.readAll("{:a 1, :b 2}") }
   }
 
-  test("empty string") {
+  test("strings") {
     intercept[RuntimeException] { Reader.readAll("") }
+    expectResult("foo") { Reader.readAll("\"foo\"") }
+    expectResult(Map("foo" -> Vector("bar"))) { Reader.readAll{"{\"foo\" [\"bar\"]}"} }
   }
 
   // non edn spec stuff (still accepted by 'clojure.edn)
