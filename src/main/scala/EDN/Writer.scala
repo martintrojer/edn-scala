@@ -25,10 +25,7 @@ object Writer {
     case false => "false"
     case null => "nil"
     case u: UUID => "#uuid \"" + u.toString + "\""
-    case d: java.util.Date => {
-      val df = DateFormat.getDateInstance(DateFormat.SHORT)
-      "#inst \"" + df.format(d) + "\""
-    }
+    case d: java.util.Date => Instant.write(d)
     case s: String =>
       if (s.startsWith(":")) s else "\"" + s + "\""
     case _ => ""

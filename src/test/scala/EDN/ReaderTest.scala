@@ -1,7 +1,6 @@
 package EDN
 
 import java.util.UUID
-import java.text.DateFormat
 import org.scalatest.FunSuite
 
 class ReaderTest extends FunSuite {
@@ -57,9 +56,8 @@ class ReaderTest extends FunSuite {
 
   // this is not EDN complaint ATM
   test("#inst") {
-    val dateStr = "2013/06/19"
-    val df = DateFormat.getDateInstance(DateFormat.SHORT)
-    expectResult(df.parse(dateStr)) { Reader.readAll("#inst \"" + dateStr + "\"") }
+    val dateStr = "2012-01-01T01:23:45.000-00:00"
+    expectResult(Instant.read(dateStr)) { Reader.readAll("#inst \"" + dateStr + "\"") }
   }
 
   test("commas") {

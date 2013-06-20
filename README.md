@@ -29,7 +29,6 @@ Also see the [tests](https://github.com/martintrojer/edn-scala/blob/master/src/t
 
 ## TODO
 
-* make #inst EDN (RFC-3339) conformant
 * leading / trailing commas
 * use proper symbol regexps
 

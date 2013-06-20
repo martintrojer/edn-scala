@@ -2,7 +2,6 @@ package EDN
 
 import scala.util.parsing.combinator._
 import java.util.UUID
-import java.text.DateFormat
 
 object Reader extends JavaTokenParsers {
   val set: Parser[Set[Any]] = "#{" ~> rep(elem) <~ "}" ^^ (Set() ++ _)
@@ -15,8 +14,7 @@ object Reader extends JavaTokenParsers {
   }
   lazy val tagElem: Parser[Any] = """#[^,#\{\}\[\]\s]+""".r ~ elem ^^ {
     case "#uuid" ~ (value: String) => UUID.fromString(value.tail.init)
-    case "#inst" ~ (value: String) => DateFormat.getDateInstance(DateFormat.SHORT)
-                                      .parse(value.tail.init)
+    case "#inst" ~ (value: String) => Instant.read(value.tail.init)
     case name ~ value => (name, value)
   }
   val ratio: Parser[Double] = floatingPointNumber ~ "/" ~ floatingPointNumber ^^ {
