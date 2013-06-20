@@ -55,7 +55,6 @@ class ReaderTest extends FunSuite {
     expectResult(UUID.fromString(uuidStr)) { Reader.readAll("#uuid\"" + uuidStr + "\"") }
   }
 
-  // this is not EDN complaint ATM
   test("#inst") {
     val dateStr = "2012-01-01T01:23:45.000-00:00"
     expectResult(Instant.read(dateStr)) { Reader.readAll("#inst \"" + dateStr + "\"") }
