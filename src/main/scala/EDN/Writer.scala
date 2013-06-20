@@ -29,7 +29,8 @@ object Writer {
       val df = DateFormat.getDateInstance(DateFormat.SHORT)
       "#inst \"" + df.format(d) + "\""
     }
-    case s: String => s
+    case s: String =>
+      if (s.startsWith(":")) s else "\"" + s + "\""
     case _ => ""
   }
 }

@@ -35,8 +35,8 @@ class WriterTest extends FunSuite {
     expectResult("(1 42 #{3.0 [66]})") { Writer.writeAll(List(1, 42, Set(3.0, Vector(66)))) }
   }
 
-  test("keyword") {
-    expectResult("a") { Writer.writeAll("a") }
+  test("strings / keyword") {
+    expectResult("\"a\"") { Writer.writeAll("a") }
     expectResult(":a") { Writer.writeAll(":a") }
   }
 
