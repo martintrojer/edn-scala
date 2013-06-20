@@ -4,7 +4,7 @@ An [EDN format](https://github.com/edn-format/edn) reader/writer for Scala.
 
 ## Usage
 
-Add the following line in your build.sbt;
+Add the following lines in your build.sbt;
 
 ```
 resolvers += "Sonatype snapshots" at "http://oss.sonatype.org/content/repositories/snapshots/"
@@ -22,7 +22,7 @@ scala> Reader.readAll("{:a 1}")
 res0: Any = Map(:a -> 1.0)
 
 scala> Writer.writeAll(Map(Vector(1) -> Set(2)))
-res1: String = {[] #{2}}
+res1: String = {[1] #{2}}
 ```
 
 Also see the [tests](https://github.com/martintrojer/edn-scala/blob/master/src/test/scala/EDN).
