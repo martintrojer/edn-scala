@@ -3,6 +3,12 @@ package EDN
 import scala.util.parsing.combinator._
 import java.util.UUID
 
+/**
+ * Namespace containing a EDN parser
+ * https://github.com/martintrojer/edn-scala
+ *
+ * The reader can be extended to handle more "tagged literals" in the pattern match in tagElem below
+ */
 object Reader extends JavaTokenParsers {
   val set: Parser[Set[Any]] = "#{" ~> rep(elem) <~ "}" ^^ (Set() ++ _)
   val map: Parser[Map[Any, Any]] = "{" ~> rep(pair) <~ "}" ^^ (Map() ++ _)
@@ -30,6 +36,12 @@ object Reader extends JavaTokenParsers {
 
   val elem: Parser[Any] = ednElem | "," ~> elem | "N" ~> elem
 
+  /**
+   * Read all EDN form in the supplied java.io.Reader and return nested List, Set, Vector and Maps representing the data
+   * @param reader java.io.Reader with source data
+   * @return Any nested List, Set, Vector and Maps with Dobules, Strings, UUID or java.util.Date
+   */
   def readAll(reader: java.io.Reader) = parseAll(elem, reader).get
+  /** See above */
   def readAll(str: String) = parseAll(elem, str).get
 }
